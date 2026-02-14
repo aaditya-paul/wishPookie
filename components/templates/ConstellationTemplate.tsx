@@ -218,7 +218,7 @@ export default function ConstellationTemplate({
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.8 }}
-              className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-linear-to-r from-violet-200 via-pink-100 to-indigo-200 text-safe max-w-full"
+              className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-linear-to-r from-violet-200 via-pink-100 to-indigo-200 text-safe max-w-full px-4 text-center"
             >
               {data.recipientName}
             </motion.h1>
@@ -482,7 +482,7 @@ export default function ConstellationTemplate({
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 2, ease: "easeOut" }}
-              className="absolute w-[min(90vw,600px)] h-[min(90vw,600px)] rounded-full bg-[radial-gradient(circle,rgba(167,139,250,0.15)_0%,transparent_70%)]"
+              className="absolute w-[min(90vw,500px)] h-[min(90vw,500px)] rounded-full bg-[radial-gradient(circle,rgba(167,139,250,0.15)_0%,transparent_70%)]"
             />
 
             {/* Center orb */}
@@ -490,7 +490,7 @@ export default function ConstellationTemplate({
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ type: "spring", bounce: 0.45, delay: 0.6 }}
-              className="relative w-28 h-28 rounded-full flex items-center justify-center mb-10 z-10"
+              className="relative w-24 h-24 md:w-28 md:h-28 rounded-full flex items-center justify-center mb-8 md:mb-10 z-10"
             >
               <div className="absolute inset-0 rounded-full bg-linear-to-br from-violet-500 via-purple-500 to-pink-500 shadow-[0_0_60px_rgba(168,85,247,0.5)]" />
               <motion.div
@@ -498,7 +498,7 @@ export default function ConstellationTemplate({
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                 className="absolute -inset-4 rounded-full border border-dashed border-white/10"
               />
-              <Sparkles className="w-12 h-12 text-white relative z-10" />
+              <Sparkles className="w-10 h-10 md:w-12 md:h-12 text-white relative z-10" />
             </motion.div>
 
             {/* Name */}
@@ -506,7 +506,7 @@ export default function ConstellationTemplate({
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 1.2, duration: 1 }}
-              className="text-5xl md:text-8xl font-bold bg-clip-text text-transparent bg-linear-to-r from-violet-100 via-pink-100 to-indigo-100 mb-8 z-10 leading-tight text-safe max-w-full"
+              className="text-4xl md:text-8xl font-bold bg-clip-text text-transparent bg-linear-to-r from-violet-100 via-pink-100 to-indigo-100 mb-6 md:mb-8 z-10 leading-tight text-safe max-w-full"
             >
               {data.recipientName}
             </motion.h1>
@@ -518,7 +518,7 @@ export default function ConstellationTemplate({
               transition={{ delay: 2 }}
               className="max-w-xl z-10"
             >
-              <p className="text-lg md:text-2xl text-white/80 leading-relaxed font-light text-safe">
+              <p className="text-base md:text-2xl text-white/80 leading-relaxed font-light text-safe">
                 {data.message.split(" ").map((word, wi) => (
                   <motion.span
                     key={wi}

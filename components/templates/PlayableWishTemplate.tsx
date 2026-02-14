@@ -200,7 +200,7 @@ export default function PlayableWishTemplate({
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.6 }}
-          className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-linear-to-r from-pink-200 via-purple-200 to-fuchsia-200 mb-4 z-10 text-center text-safe max-w-full"
+          className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-linear-to-r from-pink-200 via-purple-200 to-fuchsia-200 mb-4 z-10 text-center text-safe max-w-full px-4"
         >
           {data.recipientName}
         </motion.h1>
@@ -288,7 +288,7 @@ export default function PlayableWishTemplate({
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 1.2, duration: 1 }}
-          className="text-5xl md:text-8xl font-bold bg-clip-text text-transparent bg-linear-to-r from-pink-100 via-purple-100 to-fuchsia-100 mb-8 z-10 leading-tight text-center text-safe max-w-full"
+          className="text-4xl md:text-8xl font-bold bg-clip-text text-transparent bg-linear-to-r from-pink-100 via-purple-100 to-fuchsia-100 mb-6 md:mb-8 z-10 leading-tight text-center text-safe max-w-full"
         >
           {data.recipientName}
         </motion.h1>
@@ -299,7 +299,7 @@ export default function PlayableWishTemplate({
           transition={{ delay: 2 }}
           className="max-w-xl z-10"
         >
-          <p className="text-lg md:text-2xl text-white/80 leading-relaxed text-center font-light text-safe">
+          <p className="text-base md:text-2xl text-white/80 leading-relaxed text-center font-light text-safe">
             {data.message.split(" ").map((word, wi) => (
               <motion.span
                 key={wi}

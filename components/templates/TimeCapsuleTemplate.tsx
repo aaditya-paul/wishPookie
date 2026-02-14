@@ -105,8 +105,8 @@ export default function TimeCapsuleTemplate({
             className="w-40 h-40 md:w-52 md:h-52 rounded-full border-2 border-dashed border-amber-500/20 flex items-center justify-center"
           >
             {/* Inner circle */}
-            <div className="w-28 h-28 md:w-36 md:h-36 rounded-full bg-linear-to-br from-amber-900/40 to-stone-900/60 border border-amber-500/30 flex items-center justify-center shadow-[0_0_40px_rgba(251,191,36,0.1)]">
-              <Lock className="w-10 h-10 md:w-14 md:h-14 text-amber-400/70" />
+            <div className="w-20 h-20 md:w-36 md:h-36 rounded-full bg-linear-to-br from-amber-900/40 to-stone-900/60 border border-amber-500/30 flex items-center justify-center shadow-[0_0_40px_rgba(251,191,36,0.1)]">
+              <Lock className="w-8 h-8 md:w-14 md:h-14 text-amber-400/70" />
             </div>
           </motion.div>
           {/* Subtle pulsing glow */}
@@ -141,7 +141,7 @@ export default function TimeCapsuleTemplate({
             { label: "sec", value: seconds },
           ].map((unit) => (
             <div key={unit.label} className="flex flex-col items-center">
-              <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center backdrop-blur-sm">
+              <div className="w-14 h-14 md:w-20 md:h-20 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center backdrop-blur-sm">
                 <AnimatePresence mode="wait">
                   <motion.span
                     key={unit.value}
@@ -188,7 +188,7 @@ export default function TimeCapsuleTemplate({
         />
 
         {/* Vault door splits open */}
-        <div className="relative w-52 h-52 md:w-64 md:h-64">
+        <div className="relative w-40 h-40 md:w-64 md:h-64">
           {/* Left half */}
           <motion.div
             initial={{ x: 0 }}
@@ -196,8 +196,8 @@ export default function TimeCapsuleTemplate({
             transition={{ duration: 1.8, delay: 0.8, ease: "easeInOut" }}
             className="absolute inset-0 w-1/2 overflow-hidden"
           >
-            <div className="w-52 h-52 md:w-64 md:h-64 rounded-full bg-linear-to-br from-amber-900/50 to-stone-900/60 border border-amber-500/30 flex items-center justify-center">
-              <Lock className="w-12 h-12 text-amber-400/50" />
+            <div className="w-40 h-40 md:w-64 md:h-64 rounded-full bg-linear-to-br from-amber-900/50 to-stone-900/60 border border-amber-500/30 flex items-center justify-center">
+              <Lock className="w-8 h-8 md:w-12 md:h-12 text-amber-400/50" />
             </div>
           </motion.div>
           {/* Right half */}
@@ -207,7 +207,7 @@ export default function TimeCapsuleTemplate({
             transition={{ duration: 1.8, delay: 0.8, ease: "easeInOut" }}
             className="absolute inset-0 left-1/2 w-1/2 overflow-hidden"
           >
-            <div className="w-52 h-52 md:w-64 md:h-64 rounded-full bg-linear-to-br from-amber-900/50 to-stone-900/60 border border-amber-500/30 -ml-[100%]" />
+            <div className="w-40 h-40 md:w-64 md:h-64 rounded-full bg-linear-to-br from-amber-900/50 to-stone-900/60 border border-amber-500/30 -ml-[100%]" />
           </motion.div>
 
           {/* Center reveal glow */}
@@ -264,9 +264,9 @@ export default function TimeCapsuleTemplate({
         initial={{ scale: 0, rotate: -180 }}
         animate={{ scale: 1, rotate: 0 }}
         transition={{ type: "spring", bounce: 0.45, delay: 0.3 }}
-        className="w-24 h-24 rounded-full bg-linear-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-[0_0_60px_rgba(251,191,36,0.3)] mb-10 z-10"
+        className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-linear-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-[0_0_60px_rgba(251,191,36,0.3)] mb-8 md:mb-10 z-10"
       >
-        <Unlock className="w-10 h-10 text-white" />
+        <Unlock className="w-8 h-8 md:w-10 md:h-10 text-white" />
       </motion.div>
 
       {/* Name */}
@@ -274,7 +274,7 @@ export default function TimeCapsuleTemplate({
         initial={{ y: 30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.8, duration: 1 }}
-        className="text-5xl md:text-8xl font-bold bg-clip-text text-transparent bg-linear-to-r from-amber-100 via-yellow-100 to-orange-100 mb-8 z-10 leading-tight text-center text-safe max-w-full"
+        className="text-4xl md:text-8xl font-bold bg-clip-text text-transparent bg-linear-to-r from-amber-100 via-yellow-100 to-orange-100 mb-6 md:mb-8 z-10 leading-tight text-center text-safe max-w-full"
       >
         {data.recipientName}
       </motion.h1>
@@ -286,7 +286,7 @@ export default function TimeCapsuleTemplate({
         transition={{ delay: 1.5 }}
         className="max-w-xl z-10"
       >
-        <p className="text-lg md:text-2xl text-white/80 leading-relaxed text-center font-light text-safe">
+        <p className="text-base md:text-2xl text-white/80 leading-relaxed text-center font-light text-safe">
           {data.message.split(" ").map((word, wi) => (
             <motion.span
               key={wi}

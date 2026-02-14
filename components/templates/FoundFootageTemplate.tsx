@@ -169,7 +169,7 @@ export default function FoundFootageTemplate({
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 1, duration: 1 }}
-          className="text-4xl md:text-7xl font-bold text-white/90 mb-8 z-10 text-center leading-tight font-display text-safe max-w-full"
+          className="text-4xl md:text-7xl font-bold text-white/90 mb-6 md:mb-8 z-10 text-center leading-tight font-display text-safe max-w-full px-4"
         >
           {data.recipientName}
         </motion.h1>

@@ -130,7 +130,7 @@ export default function CreatePage() {
         </AnimatePresence>
       </div>
 
-      <main className="w-full max-w-2xl bg-white/60  backdrop-blur-xl border border-white/50 rounded-4xl shadow-xl p-8 md:p-12 z-10 transition-all">
+      <main className="w-full max-w-2xl bg-white/60  backdrop-blur-xl border border-white/50 rounded-4xl shadow-xl p-6 md:p-12 z-10 transition-all">
         <div className="mb-8 flex items-center justify-between">
           <Button
             variant="ghost"

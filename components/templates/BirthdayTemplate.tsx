@@ -121,22 +121,22 @@ export default function BirthdayTemplate({ data }: BirthdayTemplateProps) {
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="z-10 max-w-lg w-full p-8 md:p-12 mx-4 bg-white/60 backdrop-blur-xl rounded-[3rem] shadow-2xl border border-white/60 text-center"
+          className="z-10 max-w-md md:max-w-lg w-full p-6 md:p-12 mx-4 bg-white/60 backdrop-blur-xl rounded-[2rem] md:rounded-[3rem] shadow-2xl border border-white/60 text-center"
         >
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.3, type: "spring" }}
-            className="w-20 h-20 bg-linear-to-tr from-[#FFB7B2] to-[#FFDAC1] rounded-full mx-auto mb-6 flex items-center justify-center shadow-lg"
+            className="w-16 h-16 md:w-20 md:h-20 bg-linear-to-tr from-[#FFB7B2] to-[#FFDAC1] rounded-full mx-auto mb-6 flex items-center justify-center shadow-lg"
           >
-            <Sparkles className="text-white w-10 h-10" />
+            <Sparkles className="text-white w-8 h-8 md:w-10 md:h-10" />
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="text-4xl md:text-5xl font-bold mb-2 text-[#FF6F61] text-safe"
+            className="text-3xl md:text-5xl font-bold mb-2 text-[#FF6F61] text-safe"
           >
             Happy Birthday!
           </motion.h1>
@@ -154,7 +154,7 @@ export default function BirthdayTemplate({ data }: BirthdayTemplateProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
-            className="text-lg leading-relaxed text-[#7D7D7D] mb-8 font-body text-safe"
+            className="text-base md:text-lg leading-relaxed text-[#7D7D7D] mb-8 font-body text-safe"
           >
             {data.message}
           </motion.p>

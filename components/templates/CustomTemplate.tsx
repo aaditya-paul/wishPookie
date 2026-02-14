@@ -103,7 +103,7 @@ export default function CustomTemplate({ data }: CustomTemplateProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
-          className="z-10 max-w-2xl w-full p-10 md:p-12 m-4 bg-black/30 backdrop-blur-xl rounded-4xl border border-white/10 text-center shadow-2xl"
+          className="z-10 max-w-2xl w-full p-6 md:p-12 m-4 bg-black/30 backdrop-blur-xl rounded-[2rem] md:rounded-4xl border border-white/10 text-center shadow-2xl"
         >
           <motion.div
             initial={{ scale: 0 }}
@@ -118,7 +118,7 @@ export default function CustomTemplate({ data }: CustomTemplateProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="text-4xl md:text-6xl font-bold mb-4 text-transparent bg-clip-text bg-linear-to-r from-yellow-200 to-pink-200 text-safe"
+            className="text-3xl md:text-6xl font-bold mb-4 text-transparent bg-clip-text bg-linear-to-r from-yellow-200 to-pink-200 text-safe max-w-full"
           >
             For {data.recipientName}
           </motion.h1>
@@ -143,7 +143,7 @@ export default function CustomTemplate({ data }: CustomTemplateProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8 }}
-            className="text-xl md:text-2xl leading-relaxed text-white/90 font-light text-safe"
+            className="text-lg md:text-2xl leading-relaxed text-white/90 font-light text-safe"
           >
             {data.message}
           </motion.p>

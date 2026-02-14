@@ -74,7 +74,18 @@ export default function Home() {
       <footer className="py-6 text-center text-muted-foreground/80 text-sm relative z-10">
         <p className="tracking-wide">
           Made with 💖 by{" "}
-          <span className="text-primary font-medium">Aaditya Paul</span> © 2026
+          <span className="text-primary font-bold">Aaditya Paul</span> © 2026
+        </p>
+        <p className="tracking-wide">
+          visit{" "}
+          <a
+            href="https://aaditya-paul.in"
+            className="text-primary font-bold"
+            target="_blank"
+          >
+            aaditya-paul.in
+          </a>{" "}
+          for more
         </p>
       </footer>
     </div>

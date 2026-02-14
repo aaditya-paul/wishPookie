@@ -110,7 +110,7 @@ export default function AnniversaryTemplate({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
-          className="z-10 max-w-2xl w-full p-10 md:p-16 text-center space-y-8 relative cursor-pointer"
+          className="z-10 max-w-2xl w-full p-6 md:p-16 text-center space-y-6 md:space-y-8 relative cursor-pointer"
           onClick={spawnHeartBurst}
           onTouchStart={spawnHeartBurst}
         >
@@ -142,7 +142,7 @@ export default function AnniversaryTemplate({
             transition={{ duration: 1, delay: 0.2 }}
             className="relative inline-block"
           >
-            <h1 className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-linear-to-r from-pink-400 to-purple-600 pb-2 text-safe">
+            <h1 className="text-4xl md:text-7xl font-bold bg-clip-text text-transparent bg-linear-to-r from-pink-400 to-purple-600 pb-2 text-safe">
               Happy Anniversary
             </h1>
             <motion.div
@@ -157,7 +157,7 @@ export default function AnniversaryTemplate({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.5, duration: 0.8 }}
-            className="text-3xl md:text-4xl font-light text-pink-100/90 text-safe max-w-full"
+            className="text-2xl md:text-4xl font-light text-pink-100/90 text-safe max-w-full"
           >
             Dearest {data.recipientName},
           </motion.h2>
@@ -169,7 +169,7 @@ export default function AnniversaryTemplate({
             className="relative p-8 rounded-4xl bg-white/5 backdrop-blur-md border border-white/10"
           >
             <Stars className="absolute top-4 left-4 text-yellow-200/50 w-6 h-6" />
-            <p className="text-xl leading-8 text-indigo-100 font-light italic text-safe">
+            <p className="text-lg md:text-xl leading-8 text-indigo-100 font-light italic text-safe">
               &ldquo;{data.message}&rdquo;
             </p>
             <Stars className="absolute bottom-4 right-4 text-yellow-200/50 w-6 h-6" />

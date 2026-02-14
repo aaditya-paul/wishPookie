@@ -111,9 +111,9 @@ export default function SoundtrackTemplate({ data }: SoundtrackTemplateProps) {
           initial={{ scale: 0.5, opacity: 0, rotateY: 180 }}
           animate={{ scale: 1, opacity: 1, rotateY: 0 }}
           transition={{ type: "spring", bounce: 0.4, delay: 0.3 }}
-          className="w-48 h-48 md:w-64 md:h-64 rounded-3xl bg-linear-to-br from-green-400 via-emerald-500 to-teal-600 shadow-[0_0_80px_rgba(34,197,94,0.3)] flex items-center justify-center mb-10 z-10"
+          className="w-40 h-40 md:w-64 md:h-64 rounded-3xl bg-linear-to-br from-green-400 via-emerald-500 to-teal-600 shadow-[0_0_80px_rgba(34,197,94,0.3)] flex items-center justify-center mb-8 md:mb-10 z-10"
         >
-          <Music className="w-20 h-20 text-white/80" />
+          <Music className="w-16 h-16 md:w-20 md:h-20 text-white/80" />
         </motion.div>
 
         <motion.p
@@ -129,7 +129,7 @@ export default function SoundtrackTemplate({ data }: SoundtrackTemplateProps) {
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 1.2, duration: 1 }}
-          className="text-5xl md:text-8xl font-bold bg-clip-text text-transparent bg-linear-to-r from-green-200 via-emerald-100 to-teal-200 mb-8 z-10 leading-tight text-center text-safe max-w-full"
+          className="text-4xl md:text-8xl font-bold bg-clip-text text-transparent bg-linear-to-r from-green-200 via-emerald-100 to-teal-200 mb-6 md:mb-8 z-10 leading-tight text-center text-safe max-w-full"
         >
           {data.recipientName}
         </motion.h1>
@@ -140,7 +140,7 @@ export default function SoundtrackTemplate({ data }: SoundtrackTemplateProps) {
           transition={{ delay: 2 }}
           className="max-w-lg z-10"
         >
-          <p className="text-lg md:text-xl text-white/70 leading-relaxed text-center font-light text-safe">
+          <p className="text-base md:text-xl text-white/70 leading-relaxed text-center font-light text-safe">
             {data.message.split(" ").map((word, wi) => (
               <motion.span
                 key={wi}
@@ -211,7 +211,7 @@ export default function SoundtrackTemplate({ data }: SoundtrackTemplateProps) {
               animate={{ scale: 1, opacity: 1, rotateY: 0 }}
               exit={{ scale: 0.85, opacity: 0, rotateY: 30 }}
               transition={{ type: "spring", damping: 20 }}
-              className={`w-64 h-64 md:w-80 md:h-80 rounded-2xl bg-linear-to-br ${gradient} shadow-[0_20px_60px_rgba(0,0,0,0.5)] flex flex-col items-center justify-center p-6 relative overflow-hidden`}
+              className={`w-56 h-56 md:w-80 md:h-80 rounded-2xl bg-linear-to-br ${gradient} shadow-[0_20px_60px_rgba(0,0,0,0.5)] flex flex-col items-center justify-center p-6 relative overflow-hidden`}
             >
               {/* Disc lines */}
               <div className="absolute inset-0 flex items-center justify-center">
@@ -225,10 +225,10 @@ export default function SoundtrackTemplate({ data }: SoundtrackTemplateProps) {
               </div>
 
               {/* Track number */}
-              <div className="relative z-10 text-white/30 text-sm uppercase tracking-[0.3em] mb-2">
+              <div className="relative z-10 text-white/30 text-xs md:text-sm uppercase tracking-[0.3em] mb-2">
                 Track {currentTrack + 1}
               </div>
-              <div className="relative z-10 text-white font-bold text-xl md:text-2xl text-center leading-snug px-4 text-safe">
+              <div className="relative z-10 text-white font-bold text-lg md:text-2xl text-center leading-snug px-4 text-safe">
                 {tracks[currentTrack]}
               </div>
             </motion.div>
@@ -244,15 +244,17 @@ export default function SoundtrackTemplate({ data }: SoundtrackTemplateProps) {
             exit={{ opacity: 0, y: -10 }}
             className="text-center mb-8"
           >
-            <h2 className="text-2xl md:text-3xl font-bold mb-1">
+            <h2 className="text-xl md:text-3xl font-bold mb-1">
               {tracks[currentTrack]}
             </h2>
-            <p className="text-white/40 text-sm">ft. {data.recipientName}</p>
+            <p className="text-white/40 text-xs md:text-sm">
+              ft. {data.recipientName}
+            </p>
           </motion.div>
         </AnimatePresence>
 
         {/* ── Audio Visualizer ── */}
-        <div className="flex items-end gap-[3px] h-16 mb-8">
+        <div className="flex items-end gap-[2px] md:gap-[3px] h-12 md:h-16 mb-6 md:mb-8 w-full max-w-xs justify-center">
           {bars.map((bar, i) => (
             <motion.div
               key={i}
