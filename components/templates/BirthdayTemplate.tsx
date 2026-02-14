@@ -121,7 +121,7 @@ export default function BirthdayTemplate({ data }: BirthdayTemplateProps) {
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="z-10 max-w-md md:max-w-lg w-full p-6 md:p-12 mx-4 bg-white/60 backdrop-blur-xl rounded-[2rem] md:rounded-[3rem] shadow-2xl border border-white/60 text-center"
+          className="z-10 max-w-md md:max-w-lg w-full p-6 md:p-12 mx-4 bg-white/60 backdrop-blur-xl rounded-4xl md:rounded-[3rem] shadow-2xl border border-white/60 text-center"
         >
           <motion.div
             initial={{ scale: 0 }}

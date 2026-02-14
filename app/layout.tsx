@@ -10,8 +10,45 @@ const quicksand = Quicksand({
 });
 
 export const metadata: Metadata = {
-  title: "WishPookie - Send Cute Wishes",
-  description: "Create immersive, adorable wishes for your favorite people.",
+  title: {
+    default: "WishPookie — The Cutest Way to Send Wishes 💌",
+    template: "%s | WishPookie",
+  },
+  description:
+    "Create immersive, personalized wishing experiences for birthdays, anniversaries, or just because. Beautiful interactive templates, mini-games, time capsules & more — all free.",
+  keywords: [
+    "wish",
+    "birthday wish",
+    "anniversary wish",
+    "online greeting card",
+    "personalized wish",
+    "digital card",
+    "wishpookie",
+    "cute wish",
+    "interactive greeting",
+    "free greeting card",
+  ],
+  authors: [{ name: "Aaditya Paul", url: "https://aaditya-paul.in" }],
+  creator: "Aaditya Paul",
+  metadataBase: new URL("https://wish-pookie.vercel.app"),
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "WishPookie",
+    title: "WishPookie — The Cutest Way to Send Wishes 💌",
+    description:
+      "Create immersive, personalized wishing experiences for birthdays, anniversaries, or just because. Free, cute, and digital.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "WishPookie — The Cutest Way to Send Wishes 💌",
+    description:
+      "Create immersive, personalized wishing experiences for birthdays, anniversaries, or just because.",
+    creator: "@aadityapaul",
+  },
+  other: {
+    "theme-color": "#FF6B9D",
+  },
 };
 
 export default function RootLayout({
