@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
+import { getOccasionConfig } from "@/lib/occasion-config";
 import BirthdayTemplate from "@/components/templates/BirthdayTemplate";
 import AnniversaryTemplate from "@/components/templates/AnniversaryTemplate";
 import CustomTemplate from "@/components/templates/CustomTemplate";
@@ -45,56 +46,71 @@ export default function ViewPage() {
   }, [id]);
 
   if (loading) {
+    // Cycle through fun occasion emojis while loading
+    const loadingEmojis = ["✨", "🎂", "💖", "💍", "🎉", "🌟"];
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#FFFdf7]">
-        <div className="animate-spin text-4xl">✨</div>
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#FFFdf7] gap-3">
+        <div className="animate-spin text-4xl">
+          {loadingEmojis[Math.floor(Date.now() / 500) % loadingEmojis.length]}
+        </div>
+        <p className="text-sm text-gray-400 animate-pulse">
+          Unwrapping something special…
+        </p>
       </div>
     );
   }
 
   if (error || !data) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-[#FFFdf7] gap-4">
-        <h1 className="text-2xl font-bold text-gray-400">Wish not found 😢</h1>
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#FFFdf7] gap-4 px-6 text-center">
+        <div className="text-5xl mb-2">🦋</div>
+        <h1 className="text-2xl font-bold text-gray-500">
+          This wish has flown away…
+        </h1>
+        <p className="text-sm text-gray-400 max-w-xs">
+          It might have expired, or the link is incorrect. Try creating a new
+          one!
+        </p>
         <Link href="/">
-          <Button variant="pookie">Create a new one</Button>
+          <Button variant="pookie">Create a new wish ✨</Button>
         </Link>
       </div>
     );
   }
 
-  // Render template based on data.occasion or data.templateId
+  // Render template based on data.templateId and data.occasion
   const templateId = data.templateId || "";
   const occasion = data.occasion || "";
 
-  if (occasion === "anniversary" || templateId.includes("anniversary")) {
-    return <AnniversaryTemplate data={data} />;
-  }
-
-  if (templateId === "birthday-1") {
-    return <BirthdayTemplate data={data} />;
-  }
-
+  // Cross-occasion templates — these are selected explicitly by templateId
   if (templateId === "constellation") {
     return <ConstellationTemplate data={data} />;
   }
-
   if (templateId === "soundtrack") {
     return <SoundtrackTemplate data={data} />;
   }
-
   if (templateId === "time-capsule") {
     return <TimeCapsuleTemplate data={data} />;
   }
-
   if (templateId === "playable-wish") {
     return <PlayableWishTemplate data={data} />;
   }
-
   if (templateId === "found-footage") {
     return <FoundFootageTemplate data={data} />;
   }
 
-  // Fallback for new themes or custom
+  // Occasion-based default templates — route by occasion
+  if (occasion === "birthday") {
+    return <BirthdayTemplate data={data} />;
+  }
+  if (occasion === "anniversary") {
+    return <AnniversaryTemplate data={data} />;
+  }
+  if (occasion === "wedding") {
+    // Wedding uses the Anniversary template's romantic aesthetic
+    return <AnniversaryTemplate data={data} />;
+  }
+
+  // Fallback: custom occasion or unknown
   return <CustomTemplate data={data} />;
 }

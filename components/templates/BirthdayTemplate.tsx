@@ -1,7 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState, useCallback } from "react";
 import { Sparkles, Gift } from "lucide-react";
 import confetti from "canvas-confetti";
 
@@ -9,12 +9,15 @@ interface BirthdayTemplateProps {
   data: {
     recipientName: string;
     message: string;
-    from?: string; // Optional for now
+    from?: string;
   };
 }
 
 export default function BirthdayTemplate({ data }: BirthdayTemplateProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [candleLit, setCandleLit] = useState(true);
+  const [showSmoke, setShowSmoke] = useState(false);
+  const [wishMade, setWishMade] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
@@ -49,6 +52,22 @@ export default function BirthdayTemplate({ data }: BirthdayTemplateProps) {
     }
   }, [isOpen]);
 
+  const blowCandle = useCallback(() => {
+    setCandleLit(false);
+    setShowSmoke(true);
+    setTimeout(() => {
+      setWishMade(true);
+      // Second confetti wave for the wish!
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ["#FFB7B2", "#FFDAC1", "#FF6F61", "#ffe66d", "#fff"],
+      });
+    }, 800);
+    setTimeout(() => setShowSmoke(false), 2000);
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#FFF0F5] flex items-center justify-center relative overflow-hidden font-display text-[#5D5D5D]">
       {/* Background Balls */}
@@ -62,6 +81,24 @@ export default function BirthdayTemplate({ data }: BirthdayTemplateProps) {
         transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
         className="absolute bottom-20 right-20 w-48 h-48 bg-[#A0E7E5]/40 rounded-full blur-3xl"
       />
+
+      {/* Floating birthday emojis */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {["🎈", "🎂", "🎉", "🥳", "🎁"].map((emoji, i) => (
+          <span
+            key={i}
+            className="absolute text-2xl select-none"
+            style={{
+              left: `${10 + i * 18}%`,
+              bottom: "-20px",
+              animation: `emoji-float ${14 + i * 2}s linear ${i * 2}s infinite`,
+              opacity: 0.4,
+            }}
+          >
+            {emoji}
+          </span>
+        ))}
+      </div>
 
       {!isOpen ? (
         <motion.button
@@ -99,7 +136,7 @@ export default function BirthdayTemplate({ data }: BirthdayTemplateProps) {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="text-4xl md:text-5xl font-bold mb-2 text-[#FF6F61]"
+            className="text-4xl md:text-5xl font-bold mb-2 text-[#FF6F61] text-safe"
           >
             Happy Birthday!
           </motion.h1>
@@ -108,7 +145,7 @@ export default function BirthdayTemplate({ data }: BirthdayTemplateProps) {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7 }}
-            className="text-2xl md:text-3xl font-semibold mb-8 text-[#4A4A4A]"
+            className="text-2xl md:text-3xl font-semibold mb-8 text-[#4A4A4A] text-safe max-w-full overflow-hidden"
           >
             {data.recipientName}
           </motion.h2>
@@ -117,18 +154,90 @@ export default function BirthdayTemplate({ data }: BirthdayTemplateProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
-            className="text-lg leading-relaxed text-[#7D7D7D] mb-8 font-body"
+            className="text-lg leading-relaxed text-[#7D7D7D] mb-8 font-body text-safe"
           >
             {data.message}
           </motion.p>
 
+          {/* 🕯️ Candle Easter Egg */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.5 }}
+            className="relative flex flex-col items-center gap-2 mb-6"
+          >
+            {!wishMade ? (
+              <>
+                <button
+                  onClick={blowCandle}
+                  disabled={!candleLit}
+                  className="relative group cursor-pointer transition-all hover:scale-105 active:scale-95"
+                  title="Blow the candle to make a wish!"
+                >
+                  <div className="text-5xl relative">
+                    🎂
+                    {/* Flame */}
+                    <AnimatePresence>
+                      {candleLit && (
+                        <motion.span
+                          className="absolute -top-3 left-1/2 -translate-x-1/2 text-xl"
+                          style={{
+                            animation: "candle-flicker 1s ease-in-out infinite",
+                          }}
+                          exit={{
+                            scale: [1, 1.5, 0],
+                            opacity: [1, 0.5, 0],
+                            transition: { duration: 0.5 },
+                          }}
+                        >
+                          🔥
+                        </motion.span>
+                      )}
+                    </AnimatePresence>
+                    {/* Smoke */}
+                    <AnimatePresence>
+                      {showSmoke && (
+                        <motion.span
+                          className="absolute -top-6 left-1/2 -translate-x-1/2 text-sm"
+                          initial={{ opacity: 0, y: 0, scale: 0.5 }}
+                          animate={{ opacity: [0, 0.7, 0], y: -30, scale: 1.5 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 1.5 }}
+                        >
+                          💨
+                        </motion.span>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </button>
+                <p className="text-xs text-[#FFB7B2] font-medium mt-1">
+                  {candleLit ? "Tap the cake to blow the candle 🕯️" : "Whoosh…"}
+                </p>
+              </>
+            ) : (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ type: "spring" }}
+                className="bg-linear-to-r from-pink-100 to-amber-100 px-6 py-3 rounded-2xl border border-pink-200/50"
+              >
+                <p className="text-base font-medium text-[#FF6F61]">
+                  Wish made! ✨🌠
+                </p>
+                <p className="text-xs text-[#FFB7B2] mt-1">
+                  (We won't tell anyone what you wished for)
+                </p>
+              </motion.div>
+            )}
+          </motion.div>
+
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.5 }}
-            className="text-sm text-gray-400 mt-8"
+            transition={{ delay: 2 }}
+            className="text-sm text-gray-400 mt-4"
           >
-            Sent with 💖 via WishPookie
+            Sent with 💖 via Rizzlet
           </motion.div>
         </motion.div>
       )}

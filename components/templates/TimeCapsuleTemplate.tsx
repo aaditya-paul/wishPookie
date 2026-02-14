@@ -122,7 +122,7 @@ export default function TimeCapsuleTemplate({
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="text-white/50 text-sm md:text-base text-center max-w-sm mb-8 px-6 leading-relaxed"
+          className="text-white/50 text-sm md:text-base text-center max-w-sm mb-8 px-6 leading-relaxed text-safe"
         >
           {teaser}
         </motion.p>
@@ -274,7 +274,7 @@ export default function TimeCapsuleTemplate({
         initial={{ y: 30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.8, duration: 1 }}
-        className="text-5xl md:text-8xl font-bold bg-clip-text text-transparent bg-linear-to-r from-amber-100 via-yellow-100 to-orange-100 mb-8 z-10 leading-tight text-center"
+        className="text-5xl md:text-8xl font-bold bg-clip-text text-transparent bg-linear-to-r from-amber-100 via-yellow-100 to-orange-100 mb-8 z-10 leading-tight text-center text-safe max-w-full"
       >
         {data.recipientName}
       </motion.h1>
@@ -286,7 +286,7 @@ export default function TimeCapsuleTemplate({
         transition={{ delay: 1.5 }}
         className="max-w-xl z-10"
       >
-        <p className="text-lg md:text-2xl text-white/80 leading-relaxed text-center font-light">
+        <p className="text-lg md:text-2xl text-white/80 leading-relaxed text-center font-light text-safe">
           {data.message.split(" ").map((word, wi) => (
             <motion.span
               key={wi}

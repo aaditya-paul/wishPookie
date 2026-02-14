@@ -218,7 +218,7 @@ export default function ConstellationTemplate({
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.8 }}
-              className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-linear-to-r from-violet-200 via-pink-100 to-indigo-200"
+              className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-linear-to-r from-violet-200 via-pink-100 to-indigo-200 text-safe max-w-full"
             >
               {data.recipientName}
             </motion.h1>
@@ -399,7 +399,7 @@ export default function ConstellationTemplate({
                                   }
                             }
                           />
-                          <p className="text-[13px] leading-relaxed text-white/90 text-center font-light">
+                          <p className="text-[13px] leading-relaxed text-white/90 text-center font-light text-safe">
                             {star.memory}
                           </p>
                           <p className="text-[10px] text-white/30 text-center mt-2 uppercase tracking-widest">
@@ -506,7 +506,7 @@ export default function ConstellationTemplate({
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 1.2, duration: 1 }}
-              className="text-5xl md:text-8xl font-bold bg-clip-text text-transparent bg-linear-to-r from-violet-100 via-pink-100 to-indigo-100 mb-8 z-10 leading-tight"
+              className="text-5xl md:text-8xl font-bold bg-clip-text text-transparent bg-linear-to-r from-violet-100 via-pink-100 to-indigo-100 mb-8 z-10 leading-tight text-safe max-w-full"
             >
               {data.recipientName}
             </motion.h1>
@@ -518,7 +518,7 @@ export default function ConstellationTemplate({
               transition={{ delay: 2 }}
               className="max-w-xl z-10"
             >
-              <p className="text-lg md:text-2xl text-white/80 leading-relaxed font-light">
+              <p className="text-lg md:text-2xl text-white/80 leading-relaxed font-light text-safe">
                 {data.message.split(" ").map((word, wi) => (
                   <motion.span
                     key={wi}

@@ -129,7 +129,7 @@ export default function SoundtrackTemplate({ data }: SoundtrackTemplateProps) {
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 1.2, duration: 1 }}
-          className="text-5xl md:text-8xl font-bold bg-clip-text text-transparent bg-linear-to-r from-green-200 via-emerald-100 to-teal-200 mb-8 z-10 leading-tight text-center"
+          className="text-5xl md:text-8xl font-bold bg-clip-text text-transparent bg-linear-to-r from-green-200 via-emerald-100 to-teal-200 mb-8 z-10 leading-tight text-center text-safe max-w-full"
         >
           {data.recipientName}
         </motion.h1>
@@ -140,7 +140,7 @@ export default function SoundtrackTemplate({ data }: SoundtrackTemplateProps) {
           transition={{ delay: 2 }}
           className="max-w-lg z-10"
         >
-          <p className="text-lg md:text-xl text-white/70 leading-relaxed text-center font-light">
+          <p className="text-lg md:text-xl text-white/70 leading-relaxed text-center font-light text-safe">
             {data.message.split(" ").map((word, wi) => (
               <motion.span
                 key={wi}
@@ -228,7 +228,7 @@ export default function SoundtrackTemplate({ data }: SoundtrackTemplateProps) {
               <div className="relative z-10 text-white/30 text-sm uppercase tracking-[0.3em] mb-2">
                 Track {currentTrack + 1}
               </div>
-              <div className="relative z-10 text-white font-bold text-xl md:text-2xl text-center leading-snug px-4">
+              <div className="relative z-10 text-white font-bold text-xl md:text-2xl text-center leading-snug px-4 text-safe">
                 {tracks[currentTrack]}
               </div>
             </motion.div>

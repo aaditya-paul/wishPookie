@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useAuth } from "@/lib/auth-context";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "@/lib/firebase";
+import { getOccasionConfig } from "@/lib/occasion-config";
 import {
   ChevronRight,
   ChevronLeft,
@@ -37,6 +38,12 @@ export default function CreatePage() {
     clips: [] as { caption: string; date: string }[],
   });
   const [isPublishing, setIsPublishing] = useState(false);
+
+  // Occasion-reactive config
+  const occasionConfig = useMemo(
+    () => getOccasionConfig(formData.occasion),
+    [formData.occasion],
+  );
 
   // Protected Route Check
   if (loading) return null;
@@ -73,9 +80,55 @@ export default function CreatePage() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6 relative overflow-hidden">
-      {/* Background decorations */}
-      <div className="absolute top-10 right-10 w-64 h-64 bg-secondary/20 rounded-full blur-3xl animate-float" />
-      <div className="absolute bottom-10 left-10 w-80 h-80 bg-primary/20 rounded-full blur-3xl animate-pulse-soft" />
+      {/* Occasion-reactive background decorations */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={`blob1-${formData.occasion}`}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.8 }}
+          transition={{ duration: 0.8 }}
+          className={`absolute top-10 right-10 w-64 h-64 ${occasionConfig.blobColors[0]} rounded-full blur-3xl animate-float`}
+        />
+      </AnimatePresence>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={`blob2-${formData.occasion}`}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.8 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+          className={`absolute bottom-10 left-10 w-80 h-80 ${occasionConfig.blobColors[1]} rounded-full blur-3xl animate-pulse-soft`}
+        />
+      </AnimatePresence>
+
+      {/* Floating occasion emojis */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={`emojis-${formData.occasion}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            {occasionConfig.emojis.slice(0, 6).map((emoji, i) => (
+              <span
+                key={`${formData.occasion}-${i}`}
+                className="absolute text-2xl select-none"
+                style={{
+                  left: `${10 + i * 15}%`,
+                  bottom: `-20px`,
+                  animation: `emoji-float ${12 + i * 2}s linear ${i * 1.5}s infinite`,
+                  opacity: 0.5,
+                }}
+              >
+                {emoji}
+              </span>
+            ))}
+          </motion.div>
+        </AnimatePresence>
+      </div>
 
       <main className="w-full max-w-2xl bg-white/60  backdrop-blur-xl border border-white/50 rounded-4xl shadow-xl p-8 md:p-12 z-10 transition-all">
         <div className="mb-8 flex items-center justify-between">
@@ -117,11 +170,11 @@ export default function CreatePage() {
                 <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/20 text-primary mb-4">
                   <Heart className="w-6 h-6" />
                 </div>
-                <h2 className="text-3xl font-display font-bold">
-                  Who is this for?
+                <h2 className="text-3xl font-display font-bold text-safe">
+                  {occasionConfig.microcopy.heading}
                 </h2>
-                <p className="text-muted-foreground">
-                  Let's start with the lucky person.
+                <p className="text-muted-foreground text-safe">
+                  {occasionConfig.microcopy.subtitle}
                 </p>
               </div>
 
@@ -140,7 +193,7 @@ export default function CreatePage() {
                       })
                     }
                     className="w-full p-4 rounded-xl bg-white/50 border border-input focus:ring-2 focus:ring-primary/50 outline-none transition-all"
-                    placeholder="e.g. Pookie, Bestie, Mom"
+                    placeholder={occasionConfig.microcopy.namePlaceholder}
                     autoFocus
                   />
                 </div>
@@ -179,12 +232,28 @@ export default function CreatePage() {
           {step === 2 && (
             <motion.div key="step2" {...fadeIn} className="space-y-6">
               <div className="text-center">
-                <h2 className="text-3xl font-display font-bold">
+                <h2 className="text-3xl font-display font-bold text-safe">
                   Write a Message
                 </h2>
-                <p className="text-muted-foreground">
+                <p className="text-muted-foreground text-safe mb-6">
                   Pour your heart out (or keep it short & sweet).
                 </p>
+
+                {/* Vibe Starters */}
+                <div className="flex flex-wrap gap-2 justify-center mb-4">
+                  {occasionConfig.vibeStarters?.map((starter, i) => (
+                    <button
+                      key={i}
+                      onClick={() =>
+                        setFormData({ ...formData, message: starter.text })
+                      }
+                      className="px-4 py-2 rounded-full bg-white/40 border border-white/20 hover:bg-white/70 text-sm font-medium text-foreground/80 transition-all hover:scale-105 active:scale-95"
+                      title={starter.text}
+                    >
+                      ✨ {starter.label}
+                    </button>
+                  ))}
+                </div>
               </div>
 
               <textarea
@@ -193,7 +262,7 @@ export default function CreatePage() {
                   setFormData({ ...formData, message: e.target.value })
                 }
                 className="w-full p-4 rounded-xl bg-white/50 border border-input focus:ring-2 focus:ring-primary/50 outline-none min-h-[150px] resize-none"
-                placeholder="Once upon a time..."
+                placeholder={occasionConfig.microcopy.messagePlaceholder}
               />
 
               <div className="flex justify-between pt-4">

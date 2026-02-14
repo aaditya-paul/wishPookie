@@ -169,7 +169,7 @@ export default function FoundFootageTemplate({
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 1, duration: 1 }}
-          className="text-4xl md:text-7xl font-bold text-white/90 mb-8 z-10 text-center leading-tight font-display"
+          className="text-4xl md:text-7xl font-bold text-white/90 mb-8 z-10 text-center leading-tight font-display text-safe max-w-full"
         >
           {data.recipientName}
         </motion.h1>
@@ -180,7 +180,7 @@ export default function FoundFootageTemplate({
           transition={{ delay: 2 }}
           className="max-w-lg z-10"
         >
-          <p className="text-base md:text-xl text-white/60 leading-relaxed text-center">
+          <p className="text-base md:text-xl text-white/60 leading-relaxed text-center text-safe">
             {data.message.split(" ").map((word, wi) => (
               <motion.span
                 key={wi}
@@ -303,7 +303,7 @@ export default function FoundFootageTemplate({
             >
               {/* Subtle glitch frame */}
               <div className="absolute -inset-4 border border-white/5 rounded-lg" />
-              <p className="text-xl md:text-3xl text-white/80 leading-relaxed font-display font-light px-4">
+              <p className="text-xl md:text-3xl text-white/80 leading-relaxed font-display font-light px-4 text-safe">
                 &ldquo;{clip.caption}&rdquo;
               </p>
             </motion.div>

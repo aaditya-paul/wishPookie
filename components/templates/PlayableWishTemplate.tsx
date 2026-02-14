@@ -1,13 +1,15 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { Sparkles, Heart, Star, Trophy } from "lucide-react";
+import { getOccasionEmojis } from "@/lib/occasion-config";
 
 interface PlayableWishTemplateProps {
   data: {
     recipientName: string;
     message: string;
+    occasion?: string;
     gameTarget?: number; // hearts to collect (default 10)
     from?: string;
   };
@@ -23,12 +25,29 @@ interface FallingItem {
   caught: boolean;
 }
 
-const EMOJIS = ["💖", "💝", "💗", "✨", "⭐", "🌟", "💫", "🎀", "🎁", "💌"];
+const DEFAULT_EMOJIS = [
+  "💖",
+  "💝",
+  "💗",
+  "✨",
+  "⭐",
+  "🌟",
+  "💫",
+  "🎀",
+  "🎁",
+  "💌",
+];
 
 export default function PlayableWishTemplate({
   data,
 }: PlayableWishTemplateProps) {
   const target = data.gameTarget || 10;
+
+  // Occasion-specific emojis for falling items
+  const EMOJIS = useMemo(
+    () => (data.occasion ? getOccasionEmojis(data.occasion) : DEFAULT_EMOJIS),
+    [data.occasion],
+  );
 
   const [gameState, setGameState] = useState<"intro" | "playing" | "won">(
     "intro",
@@ -181,7 +200,7 @@ export default function PlayableWishTemplate({
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.6 }}
-          className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-linear-to-r from-pink-200 via-purple-200 to-fuchsia-200 mb-4 z-10 text-center"
+          className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-linear-to-r from-pink-200 via-purple-200 to-fuchsia-200 mb-4 z-10 text-center text-safe max-w-full"
         >
           {data.recipientName}
         </motion.h1>
@@ -269,7 +288,7 @@ export default function PlayableWishTemplate({
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 1.2, duration: 1 }}
-          className="text-5xl md:text-8xl font-bold bg-clip-text text-transparent bg-linear-to-r from-pink-100 via-purple-100 to-fuchsia-100 mb-8 z-10 leading-tight text-center"
+          className="text-5xl md:text-8xl font-bold bg-clip-text text-transparent bg-linear-to-r from-pink-100 via-purple-100 to-fuchsia-100 mb-8 z-10 leading-tight text-center text-safe max-w-full"
         >
           {data.recipientName}
         </motion.h1>
@@ -280,7 +299,7 @@ export default function PlayableWishTemplate({
           transition={{ delay: 2 }}
           className="max-w-xl z-10"
         >
-          <p className="text-lg md:text-2xl text-white/80 leading-relaxed text-center font-light">
+          <p className="text-lg md:text-2xl text-white/80 leading-relaxed text-center font-light text-safe">
             {data.message.split(" ").map((word, wi) => (
               <motion.span
                 key={wi}
