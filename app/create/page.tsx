@@ -482,7 +482,7 @@ export default function CreatePage() {
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
+                      className="opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity shrink-0"
                       onClick={() => {
                         const newMemories = formData.memories.filter(
                           (_, i) => i !== index,
@@ -511,7 +511,7 @@ export default function CreatePage() {
                 )}
               </div>
 
-              <div className="flex justify-between pt-4">
+              <div className="flex flex-col-reverse md:flex-row justify-between pt-4">
                 <Button variant="ghost" onClick={handleBack}>
                   Back
                 </Button>
@@ -588,7 +588,7 @@ export default function CreatePage() {
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
+                      className="opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity shrink-0"
                       onClick={() => {
                         const newTracks = formData.tracks.filter(
                           (_, i) => i !== index,
@@ -842,7 +842,7 @@ export default function CreatePage() {
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
+                      className="opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity shrink-0"
                       onClick={() => {
                         const newClips = formData.clips.filter(
                           (_, i) => i !== index,
